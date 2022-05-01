@@ -23,10 +23,7 @@ func Router(r *render.Render, mux *http.ServeMux) {
 
 	router := handles{
 		[]Handle{
-			{
-				"/json",
-				UserPage,
-			},
+			{"/api/user", UserPage},
 		},
 	}
 

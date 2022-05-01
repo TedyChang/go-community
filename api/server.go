@@ -8,8 +8,8 @@ import (
 )
 
 func main() {
-	ip := "127.0.0.1"
-	port := "3000"
+	ip := "172.30.1.27"
+	port := "8080"
 
 	r := render.New()
 	mux := http.NewServeMux()

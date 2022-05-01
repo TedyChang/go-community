@@ -14,6 +14,8 @@ create table gc_board
     content              varchar(255) not null,
     gc_board_category_id bigint       not null,
     gc_user_id           bigint       not null,
-    created_at           timestamp    not null,
-    delete_at            timestamp    not null
+    create_at            timestamp    not null default now(),
+    delete_at            timestamp             default null
 );
+
+create unique index idx_gc_board_title ON gc_board (title);
