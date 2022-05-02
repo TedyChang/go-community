@@ -11,7 +11,7 @@ import (
 var Db *bun.DB
 
 func RunDb() {
-	dsn := "postgres://postgres:postgres@localhost:3999/postgres"
+	dsn := "postgres://postgres:postgres@localhost:3999/postgres?sslmode=disable"
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 	Db = bun.NewDB(sqldb, pgdialect.New())
 

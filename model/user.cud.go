@@ -4,8 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"github.com/uptrace/bun"
+	"go-community/util"
 	"go-community/util/gcerror"
 	"log"
+	"net"
 )
 
 func (u User) CountEmail(ctx context.Context, email string) int {
@@ -64,4 +66,28 @@ func (u UserService) Create(ctx context.Context, nick string, email string, pw s
 	}
 
 	return u.UserRepository.Insert(tx, ctx, nick, email, pw)
+}
+
+func (u UserService) Login(ctx context.Context, email string, pw string) (string, error) {
+	err := Db.NewSelect().
+		Model(u.User).
+		Where("email=(?)", email).
+		Limit(1).
+		Scan(ctx)
+
+	if err != nil {
+		if _, ok := err.(*net.OpError); ok {
+			log.Printf("%+v", err)
+			return "", err
+		}
+		return "", err
+	}
+
+	match := util.MatchPassword(u.Password, pw)
+
+	if match {
+		return "success", nil
+	} else {
+		return "", err
+	}
 }

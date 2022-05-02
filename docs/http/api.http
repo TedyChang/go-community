@@ -1,8 +1,17 @@
+### Create User
+POST http://localhost:8080/api/sign-on
+Content-Type: application/json
+
+{
+  "email": "teddychangstar@gmail.com",
+  "password": "teddychangstar@gmail.com"
+}
+
+###
 
 ### Test
-GET {{url}}/user
+GET http://localhost:8080/user
 Content-Type: application/json
 
 {
 }
-
