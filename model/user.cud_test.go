@@ -10,7 +10,7 @@ import (
 )
 
 func TestUser_Create(t *testing.T) {
-	t.Run("user test", setup(func() {
+	t.Run("model / user / create", setup(func() {
 		// given
 		ctx := context.Background()
 
@@ -35,11 +35,11 @@ func TestUser_Create(t *testing.T) {
 			Insert(gomock.Any(), gomock.Any(), gomock.Eq(nick), gomock.Eq(email), gomock.Eq(pw)).
 			Return(&u.Id, nil)
 
-		// when
 		userService := m.UserService{
 			User: &u, UserRepository: mockUserRepository,
 		}
 
+		// when
 		create, err := userService.Create(ctx, nick, email, pw)
 		if err != nil {
 			log.Panic(err)
