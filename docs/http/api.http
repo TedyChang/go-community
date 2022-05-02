@@ -1,0 +1,8 @@
+
+### Test
+GET {{url}}/user
+Content-Type: application/json
+
+{
+}
+
